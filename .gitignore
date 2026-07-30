@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Derived index — rebuildable, never committed
+.index/
+
+# Editor cruft
+.vscode/
+.idea/

@@ -1,0 +1,31 @@
+name: lint
+
+# This repository contains documentation only — there is no code to build or
+# test. The only gate is that the Markdown stays well-formed and its internal
+# links resolve.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Lint Markdown
+        # Pinned to a full commit SHA, not a moving ref. Upstream documents
+        # `@main`, but a mutable ref means a third party can change what runs in
+        # your CI without you changing anything. Bump this deliberately.
+        # Rules live in .markdownlint-cli2.jsonc.
+        uses: DavidAnson/markdownlint-cli2-action@6bf21b07787794f89a243495939cd651942aeabe # v24.1.0
+        with:
+          globs: "**/*.md"

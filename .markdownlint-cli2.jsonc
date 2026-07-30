@@ -1,0 +1,23 @@
+// markdownlint-cli2 configuration for this documentation-only repository.
+// See https://github.com/DavidAnson/markdownlint-cli2 for the full rule list.
+{
+  "config": {
+    // Prose is hard-wrapped by hand, but tables and links legitimately run
+    // long. Enforcing a hard column limit here produces noise, not quality.
+    "MD013": false,
+
+    // Duplicate headings are fine across different sections of a long
+    // document (several files carry both "## Hard rules" and "## License");
+    // only immediate siblings must be unique.
+    "MD024": { "siblings_only": true },
+
+    // Inline HTML is used inside Mermaid diagram labels.
+    "MD033": false,
+
+    // Bare URLs are intentional in the credits, where the link *is* the point.
+    "MD034": false
+  },
+  "ignores": [
+    "node_modules/**"
+  ]
+}
