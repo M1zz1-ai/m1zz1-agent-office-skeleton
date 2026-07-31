@@ -114,17 +114,25 @@ the [return contract](ARCHITECTURE.md#4-the-subagent-return-contract),
 
 ## Start here
 
-1. [ARCHITECTURE.md](ARCHITECTURE.md) — what the pieces are and why the split is
-   where it is. Fifteen minutes.
-2. [MANUAL.md](MANUAL.md) — fill-in-the-blank templates for the orchestrator
-   prompt, the subagents, the return contract, and the routing table. Paste them
-   into a fresh agent session and answer the blanks.
-3. [examples/](examples/) — the same templates already filled in: a complete
-   three-agent office, plus [a worked delegation](examples/WALKTHROUGH.md) from
-   request to recorded outcome, showing the actual artifacts rather than
-   describing them. **Use the manual to build your own; use the examples to see
-   one that is built.**
-4. [CREDITS.md](CREDITS.md) — what came from elsewhere, named precisely.
+Three doors, depending on what you want right now.
+
+1. **[SETUP.md](SETUP.md) — to stand one up.** From an empty laptop to a running
+   office: prerequisites, seeding your office from the worked example, wiring the
+   pieces into the harness, the first run, and the four things that break on day
+   one. Every step ends with how you know it worked.
+2. **[MANUAL.md](MANUAL.md) — for the templates.** Fill-in-the-blank prompts for
+   the orchestrator, the subagents, the return contract, and the routing table.
+   Paste them into a fresh agent session and answer the blanks.
+3. **[examples/](examples/) — to read one that is built.** The same templates
+   already filled in: a complete three-agent office, plus
+   [a worked delegation](examples/WALKTHROUGH.md) from request to recorded
+   outcome, showing the actual artifacts rather than describing them.
+
+Then, when the questions get concrete:
+
+- [ARCHITECTURE.md](ARCHITECTURE.md) — what the pieces are and why the split is
+  where it is. Fifteen minutes.
+- [CREDITS.md](CREDITS.md) — what came from elsewhere, named precisely.
 
 Start with **two** subagents, not twelve. The gate and the return contract are
 what make the pattern work; a large roster is what you grow into.
@@ -148,6 +156,7 @@ part.](docs/img/slide-04-where-it-lives.png)
 ```text
 .
 ├── README.md                    # you are here
+├── SETUP.md                     # empty laptop -> running office
 ├── ARCHITECTURE.md              # the pattern, explained
 ├── MANUAL.md                    # paste-ready bootstrap spec
 ├── CREDITS.md                   # what came from elsewhere
