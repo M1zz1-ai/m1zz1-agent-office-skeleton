@@ -18,14 +18,16 @@ jobs:
     name: markdownlint
     runs-on: ubuntu-latest
     steps:
+      # Every action is pinned to a full commit SHA, not to a tag: a tag can be
+      # moved, a SHA cannot, so a third party cannot change what runs in your CI
+      # without you changing a line here. The trailing comment records which
+      # release the SHA belonged to when it was pinned. Bump both deliberately.
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Lint Markdown
-        # Pinned to a full commit SHA, not a moving ref. Upstream documents
-        # `@main`, but a mutable ref means a third party can change what runs in
-        # your CI without you changing anything. Bump this deliberately.
-        # Rules live in .markdownlint-cli2.jsonc.
+        # Upstream documents `@main` for this one; a mutable ref is exactly what
+        # the rule above exists to avoid. Rules live in .markdownlint-cli2.jsonc.
         uses: DavidAnson/markdownlint-cli2-action@6bf21b07787794f89a243495939cd651942aeabe # v24.1.0
         with:
           globs: "**/*.md"

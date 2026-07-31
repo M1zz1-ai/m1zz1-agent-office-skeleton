@@ -14,17 +14,6 @@ delegated work with exactly one owning subagent and one done-criterion.
 
 One agent coordinates. It does not do the work.
 
-```mermaid
-flowchart LR
-    OP([Operator]) <--> ORCH[Orchestrator<br/><i>plans · delegates · verifies · reports</i>]
-    ORCH --> S1[Subagent A<br/>docs/writing]
-    ORCH --> S2[Subagent B<br/>code review]
-    ORCH --> S3[Subagent C<br/>...]
-    S1 -.return contract.-> ORCH
-    S2 -.return contract.-> ORCH
-    S3 -.return contract.-> ORCH
-```
-
 **The orchestrator's surface is documents and configuration — never code.** This
 is the single most load-bearing constraint in the pattern, and the least
 intuitive. The temptation is constant: the orchestrator has the full context, the
@@ -43,13 +32,26 @@ Enforce it mechanically if your tool allows it. A pre-write hook that refuses
 file writes outside the orchestrator's allowed document paths costs an afternoon
 and removes the judgment call entirely.
 
-**Each subagent owns three files:**
+**Each subagent owns three files**, and the split between them is a cost split.
 
-| File | Contents | Changes |
-| --- | --- | --- |
-| `CLAUDE.md` (system prompt) | Role, protocol, hard rules, return contract. | Rarely — it is the agent's constitution. |
-| `CONTEXT.md` | Domain facts the agent needs every time: stack, conventions, where things live. | When the domain changes. |
-| `SKILLS.md` | Catalogue of the agent's skills with load triggers — which skill, on what symptom. | Whenever a skill is added. |
+![The orchestrator / subagent split: one agent coordinates, it does not build.
+This is the single most load-bearing constraint in the pattern and the least
+intuitive: the coordinator has the full context, the change looks like one line,
+and delegating feels like overhead. Give in and three things follow within a
+week — the coordinator's window fills with implementation detail and its planning
+degrades; the change skips the specialist's own tests and conventions, because
+those live in the subagent's prompt; and nothing is recorded against an owning
+agent, so the experience loop never sees it. Each subagent owns three files.
+CLAUDE.md, the system prompt, carries role, protocol, hard rules and the return
+contract, and changes rarely because it is the agent's constitution. CONTEXT.md
+carries the domain facts the agent needs every time — stack, conventions, where
+things live — and changes when the domain changes. SKILLS.md is the catalogue of
+the agent's skills with their load triggers, which skill on what symptom, and
+changes whenever a skill is added. The split is a cost split: everything in the
+system prompt is paid for on every turn, while everything in SKILLS.md is a
+pointer, cheap to carry and loaded only when a trigger fires. If a lesson can be
+phrased as "when you see X, do Y", it is a skill, not a prompt
+line.](docs/img/orchestrator-split.png)
 
 The split matters. Everything in the system prompt is paid for on **every** turn.
 Everything in `SKILLS.md` is a pointer — cheap to carry, loaded only when a
@@ -84,19 +86,28 @@ with a default attached gets either "yes" (fast, and you learned the operator's
 preference) or a correction (which is the exact information you were missing).
 Ten cheap round-trips beat one expensive misunderstanding.
 
-**What comes out** is a set of imperative nodes:
+**What comes out** is a set of imperative nodes.
 
-```text
-node-1  [docs-agent]     Draft the API reference for the /export endpoint.
-                         Done when: every public parameter documented, examples run.
-node-2  [review-agent]   Review node-1 output for factual drift against the source.
-                         Done when: zero unverified claims remain.
-node-3  [review-agent]   Standing security pass over the diff.
-                         Done when: no finding above "informational".
-```
+![The consolidation gate: one question at a time, each carrying its recommended
+answer, until a graph of nodes comes out. Before anything feature-sized is
+delegated, the request is interrogated until it is a spec. Feature-sized means two
+or more subagents doing actual work, more than roughly half an hour, or the
+operator saying some version of "from scratch". The mechanic is five steps: ask
+one question, not a list; carry your recommended answer with it; wait, then apply
+the answer; repeat until the next question has an obvious answer; emit a graph of
+nodes rather than a page of prose. What comes out is a set of imperative nodes,
+each with an owning agent, an instruction and a done-criterion that can be checked
+without redoing the work. When the operator is not there the gate does not stall
+and does not guess silently: each open question is written into the spec with its
+recommended answer marked as an assumption, everything reversible proceeds, and
+anything irreversible stops and is left as a human-reviewable
+item.](docs/img/consolidation-gate.svg)
 
-Each node: an owning agent, an imperative instruction, a done-criterion that can
-be checked without re-deriving the work.
+Each node carries exactly three things: an owning agent, an imperative
+instruction, and a done-criterion that can be checked without re-deriving the
+work. A node whose done-criterion fails that last test is not a node yet — split
+it. [examples/WALKTHROUGH.md](examples/WALKTHROUGH.md) shows a real gate exchange
+and the graph it produced.
 
 ### When the operator is not there
 
@@ -120,13 +131,20 @@ reaches the human, so they are never in this class.
 
 The line between them is **orchestration complexity, not headcount.**
 
-| | **Normal** (default) | **Batch / workflow** (opt-in) |
-| --- | --- | --- |
-| Shape | Subagents called one at a time. | One workflow run: fan-out, pipelines, fix-loops. |
-| Who holds context | The orchestrator, between every call. | The workflow definition. |
-| Adapts mid-run | Yes — the orchestrator reads each result and decides the next call. | Poorly — the graph was fixed at launch. |
-| Right when | Anything exploratory, anything where node N+1 depends on what node N found. | Well-specified fan-out: same operation over many independent targets. |
-| Cost | Lower; you stop as soon as you have the answer. | Higher; the whole graph runs. |
+![Two delegation modes: orchestration, not headcount. In normal mode, the
+default, subagents are called one at a time; the orchestrator holds the context
+between every call; it adapts mid-run, reading each result and deciding the next
+call; it is right for anything exploratory and anything where node N+1 depends on
+what node N found; and it costs less because you stop as soon as you have the
+answer. In batch or workflow mode, which is opt-in, one workflow run carries
+fan-out, pipelines and fix-loops; the workflow definition holds the context; it
+adapts poorly because the graph was fixed at launch; it is right for
+well-specified fan-out, the same operation over many independent targets; and it
+costs more because the whole graph runs. Batch mode is opt-in by the operator —
+for feature-sized work the orchestrator offers it in one line with a rough cost
+estimate rather than starting one unasked, and subagents never start workflows of
+their own, which is how you get a fan-out you did not authorize and cannot
+see.](docs/img/delegation-modes.png)
 
 Three subagents called in sequence, with the orchestrator reading each result
 before deciding the next, is **normal mode** — three agents, no workflow. One
@@ -144,6 +162,21 @@ you get a fan-out you did not authorize and cannot see.
 
 Every subagent ends its turn with a fixed-shape block. The orchestrator
 **parses** it; it does not read it.
+
+![The one artifact the whole office shares: a block the coordinator parses. Every
+subagent ends its turn with the same fixed-shape block — Result, Files touched,
+Verification, Notes for memory, Open questions. The orchestrator parses it; it
+does not read it, and that single property is what keeps the coordinator's
+context, the scarcest resource in the system, from filling up with other agents'
+transcripts. Verification carries what was actually run: "looks correct" is not a
+verification, "Tests: 41 passed, exit 0" is, and skipped is a legitimate value
+when it carries a reason while a silently omitted check is not. Open questions is
+not a courtesy field — it is where an agent puts a decision it was not entitled to
+make, and an empty one on a genuinely ambiguous task is a defect rather than a
+sign of confidence. Summary, not dump: full output goes to a run log file and the
+block carries the path and the outcome.](docs/img/return-contract.png)
+
+The block itself, which is meant to be pasted into every subagent's prompt:
 
 ```text
 ## Result
@@ -190,11 +223,18 @@ That is what makes them parseable.
 Each agent is pinned to one model, chosen by the **role's stakes**, and it does
 not change per task.
 
-| Stakes of the role | Bias toward |
-| --- | --- |
-| A wrong answer is expensive, irreversible, or silently wrong (infrastructure, security, memory quality, architecture) | The strongest model available. |
-| Output is structured by skills and cheap to redo (iterative copy, format conversion, reference-driven generation) | A mid-tier model. |
-| Coordination itself | The operator's choice — they are in the loop and feel the difference immediately. |
+![Model policy, fixed per agent: pin the role, not the task. Each agent is pinned
+to one model, chosen by the role's stakes, and it does not change per task —
+"this one's easy, use the small model" is a decision made a hundred times a week,
+badly, with no feedback signal when it goes wrong. Where a wrong answer is
+expensive, irreversible, or silently wrong — infrastructure, security, memory
+quality, architecture — bias toward the strongest model available. Where output is
+structured by skills and cheap to redo — iterative copy, format conversion,
+reference-driven generation — a mid-tier model is right. Coordination itself is
+the operator's choice, since they are in the loop and feel the difference
+immediately. The pin lives in one place, the agent's own definition file: prose
+tables, including this one, are mirrors, and mirrors
+drift.](docs/img/model-policy.png)
 
 Three properties follow, and all three are the point:
 
@@ -225,11 +265,19 @@ prompt text, and that distinction is the whole design.
 
 **One source of truth per skill. Symlinks give each agent only what it needs.**
 
-```text
-skills/shared/<bucket>/<skill-name>/     # the one real copy, in version control
-agents/<agent>/skills/<skill-name>  ->   # symlink into the library
-agents/<agent>/SKILLS.md                 # the catalogue: which skill, on what trigger
-```
+![Skill portability: one real copy per skill, symlinked into the agents that need
+it, catalogued by trigger. The skills library holds one real copy of each skill,
+in version control. Symlinks give each agent only what it needs: docs-agent links
+the doc-structure and release-notes skills, review-agent links diff-review,
+research-agent links source-check and additionally keeps one private skill of its
+own. Each agent's own catalogue names the trigger that loads each skill. One copy
+edited once propagates everywhere, no agent hauls capability it will never open,
+and a skill only one agent could ever use may live inside that agent's own skills
+directory rather than the shared library. Below, where a new skill comes from —
+the same loop the memory repository documents: repeated experience, the same shape
+three or more times, becomes a drafted skill whose trigger is written in real
+symptoms, which waits for human approval and is only then installed and
+catalogued.](docs/img/skills-portability.svg)
 
 - **One copy edited once** propagates to every agent that links it. Copy-paste
   distribution guarantees five divergent versions within a month.
@@ -308,12 +356,23 @@ to prevent, and it is unpleasant to diagnose after the fact.
 
 ## Failure modes, in the order you will meet them
 
-| Symptom | Actual cause | Fix |
-| --- | --- | --- |
-| The orchestrator "just fixed it quickly" | No mechanical enforcement of §1 | A write-blocking hook, not a stronger prompt |
-| Agents deliver plausible work that misses the point | Consolidation gate skipped | Make the gate fire on a *size* test, not on a feeling |
-| Orchestrator re-reads transcripts to find out what happened | Return contract drifted or optional | Reject malformed blocks — every time, no exemptions |
-| Prompts grow every week | Lessons written as prompt lines | Route recurring lessons to skills (§6) |
-| Two agents disagree about a fact | Fact lives in two prompts | One canonical location, others link to it |
-| Costs spike unpredictably | Per-task model choice | Pin per agent (§5) |
-| A skill exists that nobody ever loads | Trigger phrases are abstract categories | Rewrite triggers as real symptoms and error text |
+None of these is hypothetical, and none of them is fixed by trying harder. Each
+has a mechanical cause and a mechanical fix.
+
+![Failure modes, in the order you will meet them — every rule here is a scar. The
+orchestrator "just fixed it quickly": the cause is no mechanical enforcement of
+the no-code rule, and the fix is a write-blocking hook rather than a stronger
+prompt. Agents deliver plausible work that misses the point: the consolidation
+gate was skipped, so make the gate fire on a size test rather than on a feeling.
+The orchestrator re-reads transcripts to find out what happened: the return
+contract drifted or was made optional, so reject malformed blocks every time with
+no exemptions. Prompts grow every week: lessons are being written as prompt lines,
+so route recurring lessons into skills. Two agents disagree about a fact: the fact
+lives in two prompts, so keep one canonical location and have the others link to
+it. Costs spike unpredictably: per-task model choice is the cause, so pin one
+model per agent in the agent's own file. A skill exists that nobody ever loads:
+its trigger phrases are abstract categories, so rewrite the triggers as real
+symptoms and error text.](docs/img/failure-modes.png)
+
+The pattern in one line: **the gate stops you building the wrong thing, and the
+contract stops you believing you built the right one.**

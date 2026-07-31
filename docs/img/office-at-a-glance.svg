@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1070 740" width="1070" height="740" role="img" aria-labelledby="t d">
+<title id="t">The office at a glance: one coordinator, three specialists, two shared stores</title>
+<desc id="d">The operator asks the orchestrator and gets one summary back. The orchestrator plans, delegates, verifies and reports, and its surface is documents and configuration — never code. It delegates to three specialist subagents: docs-agent, which owns documentation and technical writing and is never sent code changes; review-agent, which owns code review and the standing quality pass and is never asked to implement the fix; and research-agent, which looks things up rather than guessing and returns nothing without a source. Each returns the same fixed-shape block. Below the orchestrator sits the knowledge base it recalls from before asking and records to after verifying; below the agents sits the skills library, one real copy per skill, symlinked into each agent and loaded only when a trigger fires.</desc>
+<style>
+  .bg   { fill:#0E0A14 }
+  .cell { fill:#171122; stroke:#2E2440; stroke-width:1 }
+  .act  { fill:#171122; stroke:#B57BFF; stroke-width:1 }
+  .e    { fill:none; stroke:#2E2440; stroke-width:1 }
+  .ext  { fill:none; stroke:#2E2440; stroke-width:1 }
+  .act2 { fill:none; stroke-width:2 }
+  text  { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono",monospace;
+          letter-spacing:.08em }
+  .t  { font-size:13px; fill:#EDE6DA }
+  .n  { font-size:10px; fill:#9B93A8 }
+  .b  { font-size:11px; fill:#9B93A8 }
+</style>
+
+<rect class="bg" x="0" y="0" width="1070" height="740"/>
+
+<defs>
+  <linearGradient id="ret" gradientUnits="userSpaceOnUse" x1="680" y1="175" x2="560" y2="240">
+    <stop offset="0" stop-color="#2E2440"/><stop offset="0.45" stop-color="#9B93A8"/><stop offset="1" stop-color="#EDE6DA"/>
+  </linearGradient>
+  <marker id="ah" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#EDE6DA"/>
+  </marker>
+  <marker id="ad" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#2E2440"/>
+  </marker>
+</defs>
+
+<text class="b" x="40" y="40">THE OFFICE AT A GLANCE — ONE COORDINATOR, THREE SPECIALISTS, TWO SHARED STORES</text>
+
+<!-- ============ THE OPERATOR · outside the system ============ -->
+<text class="t" x="40" y="196">OPERATOR</text>
+<path class="ext" d="M40,204 H200"/>
+<text class="n" x="40" y="224">ASKS · APPROVES</text>
+
+<path class="e" d="M200,180 H280" marker-end="url(#ad)"/>
+<text class="n" x="206" y="174">REQUEST</text>
+<path class="e" d="M280,236 H200" marker-end="url(#ad)"/>
+<text class="n" x="206" y="230">REPORT</text>
+
+<!-- ============ THE ORCHESTRATOR ============ -->
+<rect class="act" x="280" y="150" width="280" height="110"/>
+<text class="t" x="294" y="182">ORCHESTRATOR</text>
+<text class="n" x="294" y="208">PLANS · DELEGATES</text>
+<text class="n" x="294" y="230">VERIFIES · REPORTS</text>
+
+<!-- ============ THE CONSTRAINT ============ -->
+<text class="b" x="40" y="316">THE CONSTRAINT THAT MAKES IT WORK</text>
+<text class="n" x="40" y="342">THE COORDINATOR'S SURFACE IS</text>
+<text class="n" x="40" y="362">DOCUMENTS AND CONFIGURATION.</text>
+<text class="t" x="40" y="386">NEVER CODE.</text>
+<text class="n" x="40" y="418">GIVE IN ONCE AND THE SPECIALIST'S</text>
+<text class="n" x="40" y="438">OWN TESTS AND CONVENTIONS ARE</text>
+<text class="n" x="40" y="458">SKIPPED, AND NOTHING IS RECORDED</text>
+<text class="n" x="40" y="478">AGAINST AN OWNING AGENT.</text>
+
+<!-- ============ DELEGATION BUS ============ -->
+<path class="e" d="M560,190 H620"/>
+<text class="n" x="562" y="182">DELEGATE</text>
+<path class="e" d="M620,145 V465"/>
+<path class="e" d="M620,145 H680" marker-end="url(#ad)"/>
+<path class="e" d="M620,305 H680" marker-end="url(#ad)"/>
+<path class="e" d="M620,465 H680" marker-end="url(#ad)"/>
+
+<!-- ============ THE THREE SPECIALISTS ============ -->
+<text class="n" x="680" y="68">RETURN CONTRACT</text>
+
+<rect class="cell" x="680" y="80" width="350" height="130"/>
+<text class="t" x="694" y="110">DOCS-AGENT</text>
+<text class="n" x="694" y="132">DOCUMENTATION AND TECHNICAL WRITING</text>
+<text class="n" x="694" y="152">NEVER SENT A CODE CHANGE</text>
+<path class="e" d="M694,168 H1016"/>
+<text class="n" x="694" y="190">DONE: LINKS RESOLVE · SAMPLES RUN</text>
+
+<rect class="cell" x="680" y="240" width="350" height="130"/>
+<text class="t" x="694" y="270">REVIEW-AGENT</text>
+<text class="n" x="694" y="292">CODE REVIEW AND THE STANDING PASS</text>
+<text class="n" x="694" y="312">NEVER ASKED TO IMPLEMENT THE FIX</text>
+<path class="e" d="M694,328 H1016"/>
+<text class="n" x="694" y="350">DONE: EVERY FINDING HAS A SCENARIO</text>
+
+<rect class="cell" x="680" y="400" width="350" height="130"/>
+<text class="t" x="694" y="430">RESEARCH-AGENT</text>
+<text class="n" x="694" y="452">LOOK IT UP, DO NOT GUESS</text>
+<text class="n" x="694" y="472">NEVER AN ANSWER WITHOUT A SOURCE</text>
+<path class="e" d="M694,488 H1016"/>
+<text class="n" x="694" y="510">DONE: EVERY CLAIM CARRIES A SOURCE</text>
+
+<!-- ============ THE TWO SHARED STORES ============ -->
+<path class="e" d="M420,260 V560" marker-end="url(#ad)"/>
+<text class="n" x="428" y="420">RECALL · RECORD</text>
+
+<rect class="cell" x="280" y="560" width="280" height="110"/>
+<text class="t" x="294" y="592">KNOWLEDGE BASE</text>
+<text class="n" x="294" y="616">RECALL BEFORE ASKING</text>
+<text class="n" x="294" y="636">RECORD AFTER VERIFYING</text>
+<text class="n" x="294" y="656">SO A SETTLED QUESTION STAYS SETTLED</text>
+
+<path class="e" d="M855,530 V560" marker-end="url(#ad)"/>
+<text class="n" x="862" y="550">LINKS WHAT IT NEEDS</text>
+
+<rect class="cell" x="680" y="560" width="350" height="110"/>
+<text class="t" x="694" y="592">SKILLS LIBRARY</text>
+<text class="n" x="694" y="616">ONE REAL COPY PER SKILL</text>
+<text class="n" x="694" y="636">SYMLINKED INTO EACH AGENT</text>
+<text class="n" x="694" y="656">LOADED ONLY WHEN A TRIGGER FIRES</text>
+
+<text class="n" x="40" y="712">EVERY AGENT ENDS ITS TURN WITH THE SAME FIVE-HEADING BLOCK — THE COORDINATOR PARSES IT RATHER THAN READING IT.</text>
+
+<!-- ============ the one active path: work coming back ============ -->
+<path class="act2" stroke="url(#ret)" d="M680,175 H650 V240 H560" marker-end="url(#ah)"/>
+
+</svg>

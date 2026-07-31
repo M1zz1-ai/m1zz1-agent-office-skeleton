@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1070 780" width="1070" height="780" role="img" aria-labelledby="t d">
+<title id="t">The consolidation gate: one question at a time, each carrying its recommended answer, until a graph of nodes comes out</title>
+<desc id="d">Before anything feature-sized is delegated, the request is interrogated until it is a spec. Feature-sized means two or more subagents doing actual work, more than roughly half an hour, or the operator saying some version of "from scratch". The mechanic is five steps: ask one question, not a list; carry your recommended answer with it; wait, then apply the answer; repeat until the next question has an obvious answer; emit a graph of nodes rather than a page of prose. What comes out is a set of imperative nodes, each with an owning agent, an instruction and a done-criterion that can be checked without redoing the work. When the operator is not there the gate does not stall and does not guess silently: each open question is written into the spec with its recommended answer marked as an assumption, everything reversible proceeds, and anything irreversible stops and is left as a human-reviewable item.</desc>
+<style>
+  .bg   { fill:#0E0A14 }
+  .cell { fill:#171122; stroke:#2E2440; stroke-width:1 }
+  .act  { fill:#171122; stroke:#B57BFF; stroke-width:1 }
+  .e    { fill:none; stroke:#2E2440; stroke-width:1 }
+  .ext  { fill:none; stroke:#2E2440; stroke-width:1 }
+  .act2 { fill:none; stroke-width:2 }
+  text  { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono",monospace;
+          letter-spacing:.08em }
+  .t  { font-size:13px; fill:#EDE6DA }
+  .n  { font-size:10px; fill:#9B93A8 }
+  .b  { font-size:11px; fill:#9B93A8 }
+</style>
+
+<rect class="bg" x="0" y="0" width="1070" height="780"/>
+
+<defs>
+  <linearGradient id="gate" gradientUnits="userSpaceOnUse" x1="460" y1="200" x2="560" y2="175">
+    <stop offset="0" stop-color="#2E2440"/><stop offset="0.45" stop-color="#9B93A8"/><stop offset="1" stop-color="#EDE6DA"/>
+  </linearGradient>
+  <marker id="ah" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#EDE6DA"/>
+  </marker>
+  <marker id="ad" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#2E2440"/>
+  </marker>
+</defs>
+
+<text class="b" x="40" y="36">BEFORE ANYTHING FEATURE-SIZED IS DELEGATED, THE REQUEST IS INTERROGATED UNTIL IT IS A SPEC</text>
+<text class="n" x="40" y="58">FEATURE-SIZED = TWO OR MORE SUBAGENTS · MORE THAN ROUGHLY HALF AN HOUR · "FROM SCRATCH"</text>
+
+<!-- ============ THE MECHANIC ============ -->
+<text class="t" x="40" y="110">A REQUEST ARRIVES</text>
+<path class="ext" d="M40,118 H260"/>
+
+<rect class="act" x="40" y="150" width="420" height="170"/>
+<text class="t" x="54" y="180">THE GATE — A MECHANIC, NOT AN ATTITUDE</text>
+<text class="n" x="54" y="208">01 · ASK ONE QUESTION. NOT A LIST. ONE.</text>
+<text class="n" x="54" y="230">02 · CARRY YOUR RECOMMENDED ANSWER WITH IT.</text>
+<text class="n" x="54" y="252">03 · WAIT FOR THE ANSWER. APPLY IT.</text>
+<text class="n" x="54" y="274">04 · REPEAT UNTIL THE NEXT ONE IS OBVIOUS.</text>
+<text class="n" x="54" y="296">05 · EMIT A GRAPH OF NODES, NOT PROSE.</text>
+
+<text class="n" x="40" y="368">"SHOULD THE EXPORT BE CSV OR JSON? I RECOMMEND JSON —</text>
+<text class="n" x="40" y="388">THE CONSUMER IS ANOTHER AGENT, NOT A HUMAN. AGREE?"</text>
+
+<text class="n" x="40" y="424">A LIST OF EIGHT QUESTIONS GETS SKIMMED, THEN ANSWERED</text>
+<text class="n" x="40" y="444">IN ONE LINE THAT ADDRESSES TWO OF THEM. ONE QUESTION</text>
+<text class="n" x="40" y="464">WITH A DEFAULT ATTACHED GETS EITHER A FAST YES OR THE</text>
+<text class="n" x="40" y="484">EXACT CORRECTION YOU WERE MISSING.</text>
+<text class="t" x="40" y="514">TEN CHEAP ROUND-TRIPS BEAT ONE EXPENSIVE MISUNDERSTANDING.</text>
+
+<!-- ============ WHAT COMES OUT ============ -->
+<text class="b" x="560" y="110">WHAT COMES OUT — IMPERATIVE NODES, NOT A PAGE OF PROSE</text>
+
+<rect class="cell" x="560" y="130" width="470" height="90"/>
+<text class="t" x="574" y="158">NODE-1  [DOCS-AGENT]</text>
+<text class="n" x="574" y="180">DRAFT THE API REFERENCE FOR THE /EXPORT ENDPOINT.</text>
+<text class="n" x="574" y="200">DONE WHEN: EVERY PUBLIC PARAMETER DOCUMENTED.</text>
+
+<path class="e" d="M795,220 V250" marker-end="url(#ad)"/>
+
+<rect class="cell" x="560" y="250" width="470" height="90"/>
+<text class="t" x="574" y="278">NODE-2  [REVIEW-AGENT]</text>
+<text class="n" x="574" y="300">REVIEW NODE-1 OUTPUT FOR FACTUAL DRIFT.</text>
+<text class="n" x="574" y="320">DONE WHEN: ZERO UNVERIFIED CLAIMS REMAIN.</text>
+
+<path class="e" d="M795,340 V370" marker-end="url(#ad)"/>
+
+<rect class="cell" x="560" y="370" width="470" height="90"/>
+<text class="t" x="574" y="398">NODE-3  [REVIEW-AGENT]</text>
+<text class="n" x="574" y="420">STANDING SECURITY PASS OVER THE DIFF.</text>
+<text class="n" x="574" y="440">DONE WHEN: NO FINDING ABOVE "INFORMATIONAL".</text>
+
+<text class="n" x="560" y="490">EACH NODE CARRIES AN OWNING AGENT, AN IMPERATIVE</text>
+<text class="n" x="560" y="510">INSTRUCTION, AND A DONE-CRITERION THAT CAN BE CHECKED</text>
+<text class="n" x="560" y="530">WITHOUT RE-DERIVING THE WORK.</text>
+
+<!-- ============ WHEN THE OPERATOR IS NOT THERE ============ -->
+<path class="e" d="M40,570 H1030"/>
+<text class="b" x="40" y="596">WHEN THE OPERATOR IS NOT THERE — IT DOES NOT STALL, AND IT DOES NOT GUESS SILENTLY</text>
+
+<rect class="cell" x="40" y="620" width="310" height="100"/>
+<text class="t" x="54" y="650">WRITE THE QUESTION DOWN</text>
+<text class="n" x="54" y="674">WITH ITS RECOMMENDED ANSWER,</text>
+<text class="n" x="54" y="694">MARKED AS AN ASSUMPTION</text>
+
+<rect class="cell" x="380" y="620" width="310" height="100"/>
+<text class="t" x="394" y="650">PROCEED ON REVERSIBLE</text>
+<text class="n" x="394" y="674">ANYTHING A RE-RUN UNDOES</text>
+<text class="n" x="394" y="694">CARRIES ON AS NORMAL</text>
+
+<rect class="cell" x="720" y="620" width="310" height="100"/>
+<text class="t" x="734" y="650">STOP AT IRREVERSIBLE</text>
+<text class="n" x="734" y="674">LEAVE A HUMAN-REVIEWABLE</text>
+<text class="n" x="734" y="694">ITEM AND REPORT IT</text>
+
+<text class="n" x="40" y="756">IRREVERSIBLE HAS A PRECISE TEST: THE EFFECT CANNOT BE UNDONE BY RUNNING THE THING AGAIN.</text>
+
+<!-- ============ the one active path, drawn last ============ -->
+<path class="act2" stroke="url(#gate)" d="M460,200 H510 V175 H560" marker-end="url(#ah)"/>
+
+</svg>

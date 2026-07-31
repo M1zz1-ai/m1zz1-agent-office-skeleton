@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1070 700" width="1070" height="700" role="img" aria-labelledby="t d">
+<title id="t">Skill portability: one real copy per skill, symlinked into the agents that need it, catalogued by trigger</title>
+<desc id="d">The skills library holds one real copy of each skill, in version control. Symlinks give each agent only what it needs: docs-agent links the doc-structure and release-notes skills, review-agent links diff-review, research-agent links source-check and additionally keeps one private skill of its own. Each agent's own catalogue names the trigger that loads each skill. One copy edited once propagates everywhere, no agent hauls capability it will never open, and a skill only one agent could ever use may live inside that agent's own skills directory rather than the shared library. Below, where a new skill comes from — the same loop the memory repository documents: repeated experience, the same shape three or more times, becomes a drafted skill whose trigger is written in real symptoms, which waits for human approval and is only then installed and catalogued.</desc>
+<style>
+  .bg   { fill:#0E0A14 }
+  .cell { fill:#171122; stroke:#2E2440; stroke-width:1 }
+  .act  { fill:#171122; stroke:#B57BFF; stroke-width:1 }
+  .card { fill:#171122; stroke:#E9A93C; stroke-width:1 }
+  .e    { fill:none; stroke:#2E2440; stroke-width:1 }
+  .act2 { fill:none; stroke-width:2 }
+  text  { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"DejaVu Sans Mono",monospace;
+          letter-spacing:.08em }
+  .t  { font-size:13px; fill:#EDE6DA }
+  .n  { font-size:10px; fill:#9B93A8 }
+  .b  { font-size:11px; fill:#9B93A8 }
+  .w  { font-size:10px; fill:#E9A93C }
+  .ok { font-size:13px; fill:#6FD3A0 }
+</style>
+
+<rect class="bg" x="0" y="0" width="1070" height="700"/>
+
+<defs>
+  <linearGradient id="evo" gradientUnits="userSpaceOnUse" x1="270" y1="0" x2="790" y2="0">
+    <stop offset="0" stop-color="#2E2440"/><stop offset="0.45" stop-color="#9B93A8"/><stop offset="1" stop-color="#EDE6DA"/>
+  </linearGradient>
+  <marker id="ah" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#EDE6DA"/>
+  </marker>
+  <marker id="ad" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="#2E2440"/>
+  </marker>
+</defs>
+
+<text class="b" x="40" y="36">ONE SOURCE OF TRUTH PER SKILL — SYMLINKS GIVE EACH AGENT ONLY WHAT IT NEEDS</text>
+
+<!-- ============ THE LIBRARY ============ -->
+<rect class="act" x="40" y="70" width="340" height="230"/>
+<text class="t" x="54" y="100">SKILLS LIBRARY</text>
+<text class="n" x="54" y="122">SKILLS/SHARED/&lt;BUCKET&gt;/</text>
+<path class="e" d="M54,138 H366"/>
+<text class="n" x="54" y="162">· DOC-STRUCTURE/</text>
+<text class="n" x="54" y="184">· RELEASE-NOTES/</text>
+<text class="n" x="54" y="206">· DIFF-REVIEW/</text>
+<text class="n" x="54" y="228">· SOURCE-CHECK/</text>
+<path class="e" d="M54,246 H366"/>
+<text class="n" x="54" y="270">ONE REAL COPY, IN VERSION CONTROL.</text>
+<text class="n" x="54" y="290">EDITED ONCE, IT PROPAGATES EVERYWHERE.</text>
+
+<text class="n" x="40" y="336">COPY-PASTE DISTRIBUTION GUARANTEES FIVE DIVERGENT</text>
+<text class="n" x="40" y="356">VERSIONS WITHIN A MONTH.</text>
+<text class="n" x="40" y="388">A SKILL ONLY ONE AGENT COULD EVER USE MAY LIVE INSIDE</text>
+<text class="n" x="40" y="408">THAT AGENT'S OWN SKILLS/ — SHARING A CAPABILITY NOBODY</text>
+<text class="n" x="40" y="428">ELSE CAN ACT ON BUYS NOTHING.</text>
+
+<!-- ============ SYMLINKS ============ -->
+<path class="e" d="M380,185 H500"/>
+<text class="n" x="390" y="178">SYMLINKS</text>
+<path class="e" d="M500,120 V360"/>
+<path class="e" d="M500,120 H620" marker-end="url(#ad)"/>
+<path class="e" d="M500,240 H620" marker-end="url(#ad)"/>
+<path class="e" d="M500,360 H620" marker-end="url(#ad)"/>
+
+<!-- ============ THE AGENTS ============ -->
+<rect class="cell" x="620" y="70" width="410" height="100"/>
+<text class="t" x="634" y="100">DOCS-AGENT</text>
+<text class="n" x="634" y="124">→ DOC-STRUCTURE/ · RELEASE-NOTES/</text>
+<text class="n" x="634" y="146">ITS SKILLS.MD NAMES THE TRIGGER FOR EACH</text>
+
+<rect class="cell" x="620" y="190" width="410" height="100"/>
+<text class="t" x="634" y="220">REVIEW-AGENT</text>
+<text class="n" x="634" y="244">→ DIFF-REVIEW/</text>
+<text class="n" x="634" y="266">NOT THE DOC SKILLS IT WOULD NEVER OPEN</text>
+
+<rect class="cell" x="620" y="310" width="410" height="100"/>
+<text class="t" x="634" y="340">RESEARCH-AGENT</text>
+<text class="n" x="634" y="364">→ SOURCE-CHECK/</text>
+<text class="n" x="634" y="386">PLUS ONE PRIVATE SKILL OF ITS OWN</text>
+
+<!-- ============ WHERE A NEW SKILL COMES FROM ============ -->
+<path class="e" d="M40,470 H1030"/>
+<text class="b" x="40" y="496">WHERE A NEW SKILL COMES FROM — THE SAME LOOP THE MEMORY REPOSITORY DOCUMENTS</text>
+
+<rect class="cell" x="40" y="520" width="230" height="90"/>
+<text class="t" x="54" y="550">REPEATED</text>
+<text class="t" x="54" y="570">EXPERIENCE</text>
+<text class="n" x="54" y="594">THE SAME SHAPE, 3+ TIMES</text>
+
+<rect class="cell" x="290" y="520" width="230" height="90"/>
+<text class="t" x="304" y="550">DRAFTED</text>
+<text class="t" x="304" y="570">SKILL</text>
+<text class="n" x="304" y="594">TRIGGER IN REAL SYMPTOMS</text>
+
+<rect class="card" x="540" y="520" width="230" height="90"/>
+<text class="t" x="554" y="550">HUMAN</text>
+<text class="t" x="554" y="570">APPROVAL</text>
+<text class="w" x="554" y="594">NEVER AUTOMATIC</text>
+
+<rect class="cell" x="790" y="520" width="230" height="90"/>
+<text class="ok" x="804" y="550">INSTALLED</text>
+<text class="n" x="804" y="574">AND CATALOGUED</text>
+<text class="n" x="804" y="594">WITH ITS TRIGGER</text>
+
+<text class="n" x="40" y="648">A SKILL WHOSE TRIGGER IS AN ABSTRACT CATEGORY NEVER FIRES. WRITE THE REAL SYMPTOM AND THE REAL ERROR TEXT.</text>
+<text class="n" x="40" y="670">AN AGENT THAT CAN WRITE A CAPABILITY AND INSTALL IT INTO ITSELF HAS A CLOSED LOOP WITH NO CORRECTION STEP.</text>
+
+<!-- ============ the one active path, drawn last ============ -->
+<path class="act2" stroke="url(#evo)" d="M270,565 H290"/>
+<path class="act2" stroke="url(#evo)" d="M520,565 H540"/>
+<path class="act2" stroke="url(#evo)" d="M770,565 H790" marker-end="url(#ah)"/>
+
+</svg>
